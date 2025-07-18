@@ -1,0 +1,42 @@
+const { Client, GatewayIntentBits } = require('discord.js');
+const express = require('express');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Express server to keep Render alive
+app.get('/', (req, res) => {
+  res.send('Bot is running!');
+});
+app.listen(port, () => {
+  console.log(`Express server listening on port ${port}`);
+});
+
+// Discord bot setup
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
+
+const TOKEN = process.env.TOKEN || 'YOUR_DISCORD_BOT_TOKEN';
+
+client.on('ready', () => {
+  console.log(`🤖 Logged in as ${client.user.tag}`);
+});
+
+client.on('messageCreate', (message) => {
+  if (message.author.bot) return;
+
+  if (message.content.toLowerCase() === '!ping') {
+    message.reply('Pong! 🏓');
+  }
+
+  if (message.content.toLowerCase() === '!help') {
+    message.reply('এই বটের কমান্ড: !ping, !help ✅');
+  }
+});
+
+client.login(TOKEN);

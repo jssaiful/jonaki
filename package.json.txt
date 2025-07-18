@@ -1,0 +1,13 @@
+{
+  "name": "simple-discord-bot",
+  "version": "1.0.0",
+  "description": "A simple Discord bot with Express for Render deployment.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "express": "^4.18.2"
+  }
+}
